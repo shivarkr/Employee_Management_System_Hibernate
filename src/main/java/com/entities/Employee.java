@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 @Entity
-@Table(name = "HEmployee")
+@Table(name = "HOPEmployee")
 public class Employee {
 
     @Id
@@ -18,7 +18,7 @@ public class Employee {
     private String mail;
     @Embedded
     private Address1 address1;
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "employee")
     private List<WorkExperience> workHistory;
 
 

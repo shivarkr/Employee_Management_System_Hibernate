@@ -1,5 +1,4 @@
 package com.hibernateConnectors;
-
 import com.entities.Address1;
 import com.entities.Employee;
 import com.entities.WorkExperience;
@@ -9,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HibernateCRUD {
@@ -26,20 +27,21 @@ public class HibernateCRUD {
     }
     public static void insert(){
         Employee employee = InputTakers.takeInputOfEmployee();
+        //Employee employee  = giveDummyEmployee();
         Session session = giveSession();
         Transaction transaction = null;
         try {
 
             transaction = session.beginTransaction();
 
-            session.persist(employee);
+
             for(int i = 0 ;i<employee.getWorkHistory().size();i++){
 
                 employee.getWorkHistory().get(i).setNthexperience(i+1);
                 employee.getWorkHistory().get(i).setEmployee(employee);
-                session.persist(employee.getWorkHistory().get(i));
 
             }
+            session.persist(employee);
 
             transaction.commit();
 
@@ -91,9 +93,6 @@ public class HibernateCRUD {
         Transaction transaction=null;
         try{
             transaction = session.beginTransaction();
-            for(int i = 0 ;i<employee.getWorkHistory().size();i++){
-                session.remove(employee.getWorkHistory().get(i));
-            }
             session.remove(employee);
             transaction.commit();
 
@@ -138,19 +137,13 @@ public class HibernateCRUD {
             employee.setSalary(updatedEmployee.getSalary());
             employee.setMail(updatedEmployee.getMail());
             employee.setAddress(updatedEmployee.getAddress());
+            employee.setWorkHistory(updatedEmployee.getWorkHistory());
 
-            // delete old records from DB
+
             for(int i = 0 ;i<employee.getWorkHistory().size();i++){
-                session.remove(employee.getWorkHistory().get(i));
-
-            }
-
-            for(int i = 0 ;i<updatedEmployee.getWorkHistory().size();i++){
-                WorkExperience work = updatedEmployee.getWorkHistory().get(i);
+                WorkExperience work = employee.getWorkHistory().get(i);
                 work.setNthexperience(i+1);
                 work.setEmployee(employee);
-                session.persist(work);
-
             }
 
             transaction.commit();
@@ -169,7 +162,7 @@ public class HibernateCRUD {
 
     }
 
-/*
+
     //for testing
     public static Employee giveDummyEmployee(){
         Address1 address1 = new Address1("124", "Main St", "Springfield", "IL", "USA");
@@ -193,9 +186,6 @@ public class HibernateCRUD {
         return employee;
     }
 
- */
-//    public static void main(String[] args) {
-//        Update(113);
-//
-//    }
+
+
 }
