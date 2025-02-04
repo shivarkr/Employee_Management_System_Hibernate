@@ -1,6 +1,6 @@
 package com.service;
 
-import com.entities.Address1;
+import com.entities.Address;
 import com.entities.Employee;
 import com.entities.WorkExperience;
 import com.utils.InputValidators;
@@ -55,10 +55,10 @@ public class InputTakers {
             }
         } while (!InputValidators.isValidEmail(email));
 
-        Address1 address1 = takeInputOfAddress();
+        Address address = takeInputOfAddress();
         List<WorkExperience> workHistory = takeInputOfWorkExperience();
 
-        return new Employee(name, designation, phn, salary, email, address1, workHistory);
+        return new Employee(name, designation, phn, salary, email, address, workHistory);
 
     }
 
@@ -83,7 +83,7 @@ public class InputTakers {
         return salary;
     }
 
-    public static Address1 takeInputOfAddress() {
+    public static Address takeInputOfAddress() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter the details of Address");
 
@@ -137,7 +137,7 @@ public class InputTakers {
             }
         } while (!InputValidators.isValidString(country));
 
-        return new Address1(streetNumber, streetName, city, state, country);
+        return new Address(streetNumber, streetName, city, state, country);
     }
 
     public static List<WorkExperience> takeInputOfWorkExperience() {

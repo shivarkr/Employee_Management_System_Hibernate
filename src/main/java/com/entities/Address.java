@@ -3,7 +3,7 @@ package com.entities;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class Address1 {
+public class Address {
     private String streetNumber;
     private String streetName;
     private String city;
@@ -11,7 +11,7 @@ public class Address1 {
     private String country;
 
 
-    public Address1(String streetNumber, String streetName, String city, String state, String country) {
+    public Address(String streetNumber, String streetName, String city, String state, String country) {
         this.streetNumber = streetNumber;
         this.streetName = streetName;
         this.city = city;
@@ -19,7 +19,7 @@ public class Address1 {
         this.country = country;
     }
 
-    public Address1() {
+    public Address() {
     }
 
     public String getStreetNumber() {

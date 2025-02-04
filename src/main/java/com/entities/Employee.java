@@ -17,18 +17,18 @@ public class Employee {
     private double salary;
     private String mail;
     @Embedded
-    private Address1 address1;
+    private Address address;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "employee")
     private List<WorkExperience> workHistory;
 
 
-    public Employee(String name, String designation, String phoneNumber, double salary, String mail, Address1 address1, List<WorkExperience> workHistory) {
+    public Employee(String name, String designation, String phoneNumber, double salary, String mail, Address address, List<WorkExperience> workHistory) {
         this.name = name;
         this.designation = designation;
         this.phoneNumber = phoneNumber;
         this.salary = salary;
         this.mail = mail;
-        this.address1 = address1;
+        this.address = address;
         this.workHistory = workHistory;
     }
 
@@ -75,12 +75,12 @@ public class Employee {
         this.mail = mail;
     }
 
-    public Address1 getAddress() {
-        return address1;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddress(Address1 address1) {
-        this.address1 = address1;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public List<WorkExperience> getWorkHistory() {
@@ -108,7 +108,7 @@ public class Employee {
                 "phoneNumber=" + phoneNumber + '\n' +
                 "salary=" + salary+ '\n'+
                 "mail=" + mail + '\n'+
-                "address=" + address1 +'\n'+
+                "address=" + address +'\n'+
                 "workHistory=" + workHistory+ '\n'+
                 '}';
     }

@@ -1,5 +1,5 @@
 package com.hibernateConnectors;
-import com.entities.Address1;
+import com.entities.Address;
 import com.entities.Employee;
 import com.entities.WorkExperience;
 import com.service.InputTakers;
@@ -16,7 +16,7 @@ public class HibernateCRUD {
 
     public static Session giveSession(){
         final Configuration cnf = new Configuration();
-        cnf.addAnnotatedClass(Address1.class);
+        cnf.addAnnotatedClass(Address.class);
         cnf.addAnnotatedClass(Employee.class);
         cnf.addAnnotatedClass(WorkExperience.class);
         cnf.configure();
@@ -26,8 +26,8 @@ public class HibernateCRUD {
 
     }
     public static void insert(){
-        Employee employee = InputTakers.takeInputOfEmployee();
-        //Employee employee  = giveDummyEmployee();
+        //Employee employee = InputTakers.takeInputOfEmployee();
+        Employee employee  = giveDummyEmployee();
         Session session = giveSession();
         Transaction transaction = null;
         try {
@@ -165,7 +165,7 @@ public class HibernateCRUD {
 
     //for testing
     public static Employee giveDummyEmployee(){
-        Address1 address1 = new Address1("124", "Main St", "Springfield", "IL", "USA");
+        Address address = new Address("124", "Main St", "Springfield", "IL", "USA");
 
         // Create WorkExperience objects
         WorkExperience work1 = new WorkExperience("Company A", "Software Engineer");
@@ -180,12 +180,15 @@ public class HibernateCRUD {
         workHistory.add(work2);
 
         // Create Employee object
-        Employee employee = new Employee("Shiva", "Developer", "123-456-7890", 75000.00, "john.doe@example.com", address1, workHistory);
+        Employee employee = new Employee("Shiva", "Developer", "123-456-7890", 75000.00, "john.doe@example.com", address, workHistory);
         work1.setEmployee(employee);
         work1.setEmployee(employee);
         return employee;
     }
 
+//    public static void main(String[] args) {
+//        insert();
+//    }
 
 
 }
